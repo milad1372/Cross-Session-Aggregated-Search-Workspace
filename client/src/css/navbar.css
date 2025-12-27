@@ -1,0 +1,115 @@
+/* Reset default styles for Material-UI IconButton */
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root {
+    background-color: transparent !important;
+    color: black !important;
+}
+
+/* Remove margins */
+.m-0 {
+    margin: 0 !important;
+}
+
+/* Main navbar styling */
+.header-navbar {
+    transform: translate3d(0, 0, 0);
+    min-width: 11.0625rem;
+    transition: .3s ease-in-out;
+    background: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.25);
+    height: 4rem;
+    left: 0;
+    padding: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1030;
+    border: none !important;
+}
+
+/* Alternative navbar styling (kept for reference) */
+.header-navbar-main {
+    transform: translate3d(0, 0, 0);
+    min-width: 11.0625rem;
+    transition: .3s ease-in-out;
+    background: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.25);
+    height: 3.5rem;
+    left: 0;
+    padding: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1030;
+    border: none !important;
+}
+
+/* Wrapper for search bar in expanded mode */
+.wrapper {
+    position: relative;
+    border: none !important;
+}
+
+/* Optional border for styling */
+.wrapper::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid #ccc !important;
+    pointer-events: none;
+}
+
+/* Navigation link styling */
+.nav-link {
+    font-size: .875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #4d4d4d;
+    padding: 0 15px;
+}
+
+/* Specific styling for far-right navigation */
+.far-right-nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+}
+
+/* Home icon styling */
+.home-icon {
+    font-size: 2rem; /* Increased from 1.5rem to 2rem (32px) */
+    color: #4d4d4d;
+    padding: 0 10px;
+}
+
+/* Icon styling within nav links */
+.nav-link .fa-user,
+.nav-link .fa-folder-tree {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+/* Hover effects */
+.navbar-brand:hover .home-icon,
+.nav-link:hover {
+    color: #007bff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .far-right-nav {
+        margin-left: 0;
+        padding: 10px 15px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .home-icon {
+        font-size: 1.5rem; /* Adjusted to 1.5rem (24px) on small screens */
+    }
+}

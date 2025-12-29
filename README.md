@@ -42,10 +42,29 @@ Beyond aggregation, the system includes an **interactive workspace** for cross-s
 
 ### AI-Generated Summaries (ICR+AIS)
 - Generates concise **workspace-level** and **cluster-level** summaries with **inline citations** back to saved resources
-- Summaries are designed to be quickly readable (e.g., word cap and temperature configurable in code)
+- Summaries are designed to be quickly readable and stable (e.g., low temperature generation)
 
 ### Combined Human-AI (ICR+IPH+AIS)
-- Highlighted passages are injected into the summarization prompt as a **salience signal**, steering what the AI prioritizes
+- Highlighted passages are injected into the summarization prompt as an explicit **salience signal**, steering what the AI prioritizes
+
+---
+
+## 🧠 Prompt Design (Prompt Programming)
+
+The summarization prompt is intentionally simple and attribution-focused:
+
+- **System role**: instructs the model to behave as a *concise, domain-expert summariser*.
+- **Salience clause**: if highlights are available, the prompt includes a short clause such as  
+  “Using the following highlighted keywords: …” (otherwise, it indicates no highlights were provided).
+- **Reference mapping**: an optional mapping block provides document IDs for citation.
+- **Task constraints**:
+  - bullet-point summary by main topic  
+  - cite items using **[docId:<id>]**  
+  - do **not** mention the source/platform names
+
+Implementation details (server route):
+- Model: `gpt-4o-2024-05-13`, temperature `0.4`, with retries and a 1-job concurrency limiter.
+- For long inputs, summarization falls back to a hierarchical process (chunk → partial summaries → final summary).
 
 ---
 
@@ -57,7 +76,7 @@ Beyond aggregation, the system includes an **interactive workspace** for cross-s
   - Ex Libris Primo API
   - Wikipedia API
 - **LLM Summarization**:
-  - OpenAI API (configurable in code; enable only for AIS conditions)
+  - OpenAI Chat Completions (used only for AIS conditions)
 
 ---
 
@@ -79,17 +98,16 @@ cd Search-Result-Aggregation-Approaches
 Create `server/.env`:
 
 ```env
-EUROPENA_API_KEY=XXXX
+EUROPEANA_API_KEY=XXXX
 PRIMO_API_KEY=XXXX
 MONGODB_URI=mongodb+srv://...
+
 BASE_URL_EUROPEANA=https://api.europeana.eu/record/v2/search.json
-BASE_URL_LIBRARY=http://147.182.148.79/sils/api/search
 BASE_URL_PRIMO=https://api-na.hosted.exlibrisgroup.com/primo/v1/search
 BASE_URL_WIKIPEDIA=https://en.wikipedia.org/w/api.php
 
 # AI summaries (required only for AIS conditions)
 OPENAI_API_KEY=XXXX
-OPENAI_MODEL=gpt-4
 ```
 
 #### Option B: `server/config.js` (legacy pattern)

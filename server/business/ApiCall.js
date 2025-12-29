@@ -12,7 +12,6 @@ const Base_URL_For_Europeana = process.env.Base_URL_For_Europeana;
 const Base_URL_For_exlibrisgroup = process.env.Base_URL_For_exlibrisgroup;
 const BASE_URL_FOR_WIKIPEDIA = process.env.BASE_URL_FOR_WIKIPEDIA;
 
-const yakeURL = "yakeURL"; //--- IGNORE ---
 const stopWords = [
     'i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', 'your', 'yours',
     'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', 'her', 'hers',
@@ -54,36 +53,6 @@ module.exports = {
             return null;
         }
     },
-
-    // retrieveKeywordsFromYAKE: async function(title) {
-    //     try {
-    //         const response = await axios.post(yakeURL, {
-    //             language: "en",
-    //             max_ngram_size: 2,
-    //             number_of_keywords: 5,
-    //             text: title
-    //         }, {
-    //             headers: {
-    //                 "accept": "application/json",
-    //                 "Content-Type": "application/json"
-    //             }
-    //         });
-
-    //         const keywords = response.data ? response.data.map(keywordObj => keywordObj.ngram) : [];
-
-    //         const filteredKeywords = keywords.filter(keyword => {
-    //             const parts = keyword.toLowerCase().split(/[- .:;?!~,`"&|()<>{}\[\]\r\n/\\]+/);
-    //             return !parts.some(part => stopWords.includes(part));
-    //         });
-
-    //         return filteredKeywords;
-
-    //     } catch (error) {
-    //         console.error("Error retrieving keywords from YAKE:", error);
-    //         return [];
-    //     }
-    // },
-
 
     retrieveDocumentsFromexlibrisgroupAPI: async function (searchInput, pageNumber, response) {
 
